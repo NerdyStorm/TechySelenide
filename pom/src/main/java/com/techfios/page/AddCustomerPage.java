@@ -5,8 +5,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver.SystemProperty;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -25,14 +30,14 @@ public class AddCustomerPage {
     //WebElement Library
     @FindBy (how = How.XPATH, using = "//h5[contains(text(), 'Add Contact')]") WebElement pageTitle;
     @FindBy (how = How.XPATH, using = "//input[@name='account']") WebElement fullName;
-    @FindBy (how = How.XPATH, using = "//select[@id='cid']//*") List<WebElement> company;
+    @FindBy (how = How.XPATH, using = "//select[@id='cid']//*") List<WebElement> companyList;
     @FindBy (how = How.XPATH, using = "//input[@id='email']") WebElement randomEmail;
     @FindBy (how = How.XPATH, using = "//input[@id='phone']") WebElement randomPhone;
     @FindBy (how = How.XPATH, using = "//input[@id='address']") WebElement randomAddress;
     @FindBy (how = How.XPATH, using = "//input[@id='city']") WebElement randomCity;
     @FindBy (how = How.XPATH, using = "//input[@id='state']") WebElement randomState;
     @FindBy (how = How.XPATH, using = "//input[@id='zip']") WebElement randomZipCode;
-    @FindBy (how = How.XPATH, using = "//select[@name='country']//*") List<WebElement> country;
+    @FindBy (how = How.XPATH, using = "//select[@name='country']//*") List<WebElement> countryList;
     @FindBy (how = How.XPATH, using = "//button[@id='submit']") WebElement submit;
     @FindBy (how = How.XPATH, using = "//a[contains(text(), 'List Customers')]") WebElement listCustomers;
 
@@ -123,27 +128,33 @@ public class AddCustomerPage {
         }
     }
     public void selectCountry(String c){
-        for (WebElement e: country){
-            if (c.equalsIgnoreCase(e.getText())){
-                e.click();
-                //System.out.println("selected -> " + e.getText());
-                break;
-            }
-        }
+        // try {
+        //     Thread.sleep(2000);
+        // } catch (InterruptedException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
+        //country.click();
+        //System.out.println(countryList.size());
+        selectfromDropdown(countryList, c);
+
     }
     public void selectCompany(String c){
-        for (WebElement e: company){
-            if (c.equalsIgnoreCase(e.getText())){
-                e.click();
-                //System.out.println("selected -> " + e.getText());
-                break;
-            }
-        }
+        selectfromDropdown(companyList, c);
     }
     public void selectfromDropdown(List<WebElement> w, String c){
         for (WebElement e: w){
+            System.out.println(e.getText());
             if (c.equalsIgnoreCase(e.getText())){
+                //(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(e)).click();;
+                //e.click();
+                //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", e); 
                 e.click();
+                // Actions a = new Actions(driver);
+                // a.moveToElement(e).click().build().perform();;
+                //System.out.println(e.);
+                //e.click();
+                //e.sendKeys(Keys.RETURN);
                 System.out.println("selected -> " + e.getText());
                 break;
             }
@@ -157,6 +168,27 @@ public class AddCustomerPage {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    public String readTableData(int Row, int Column){
+        String path = "//table//tr[" + Row + "]/td[" + Column + "]";
+        System.out.println(path);
+        (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(path)));
+        WebElement tableData = driver.findElement(By.xpath(path));
+        return tableData.getText();
+    }
+    public String checkUserData(String name, int Rows){
+        String user = "";
+        for (int i = 1; i < Rows; i++){
+            if (readTableData(i, 3).equals(name)){
+                user = name;
+                return user;
+            }
+        }
+        return user;
+    }
+    public void verifyUserData(String name, int checkRows){
+        Assert.assertEquals(checkUserData(name, checkRows), name, "user is not there!");
+        
     }
 
 }

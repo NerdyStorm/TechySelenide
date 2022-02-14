@@ -46,7 +46,7 @@ public class AddCustomerTest {
         loginPage.login(username, password);
         DashboardPage dashboardPage = new DashboardPage(driver);
 
-        //remove from this line to 60 before using automatic creator in line 63-77
+        //remove from this line to 60 before using automatic creator in line 66-80
         dashboardPage.verifyDashboard();
         dashboardPage.clickOnCustomers();
         dashboardPage.clickOnAddCustomers();
@@ -57,10 +57,14 @@ public class AddCustomerTest {
         addCustomerPage.verifyAddCustomersPage();
         addCustomerPage.fillRandomData();
         addCustomerPage.selectCompany("Techfios");
-        addCustomerPage.selectCountry("Bangladesh");
+        addCustomerPage.selectCountry("Algeria");
         addCustomerPage.submit();
         addCustomerPage.clickOnListCustomers();
         addCustomerPage.verifyListCustomersPage();
+        //String data = addCustomerPage.readTableData(1, 3);
+        //System.out.println(data);
+        addCustomerPage.verifyUserData("Md Hossain", 10); //Checks first 10 rows for text "Md Hossain", after which it runs the Assertion if it's found
+
 
         /*
         int i = 0;
@@ -78,8 +82,8 @@ public class AddCustomerTest {
         addCustomerPage.selectCountry("Bangladesh");
         addCustomerPage.submit();
             i++;
-        }
-        */
+        }*/
+        
 
         //addCustomerPage
         
@@ -89,7 +93,7 @@ public class AddCustomerTest {
     @AfterMethod
     public void tearDown(){
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
             driver.quit();
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
