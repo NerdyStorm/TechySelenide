@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "Techfios Website">
+
+    <test name = "TestOne">
+        <parameter name = "username1" value = "demo@techfios.com"/>
+        <parameter name = "password1" value = "abc123"/>
+        <!-- <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/> --> 
+        <classes>
+            <class name = "com.techfios.Tests.LoginTest"/>
+            <!-- <class name = ""/> -->
+        </classes>
+    </test>
+
+    <test name = "TestTwo">
+        <parameter name = "username" value = "demo@techfios.com"/>
+        <parameter name = "password" value = "abc123"/>
+        <!-- <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/>
+        <parameter name = "" value = ""/> --> 
+        <classes>
+            <class name = "com.techfios.Tests.AddCustomerTest"/>
+            <!-- <class name = ""/> -->
+        </classes>
+    </test>
+
+
+        
+</suite>
