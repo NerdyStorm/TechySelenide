@@ -5,6 +5,7 @@ import com.techfios.page.AddCustomerPage;
 import com.techfios.page.DashboardPage;
 import com.techfios.page.LoginPage;
 import com.techfios.util.BrowserFactory;
+import com.techfios.util.TakeScreenshot;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -21,6 +22,8 @@ public class LoginTest extends BrowserFactory{
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
+        TakeScreenshot t = new TakeScreenshot(driver);
+        t.capture();
     }
     @AfterMethod
     public void tearDown(){

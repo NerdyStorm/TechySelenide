@@ -4,6 +4,7 @@ import com.techfios.page.AddCustomerPage;
 import com.techfios.page.DashboardPage;
 import com.techfios.page.LoginPage;
 import com.techfios.util.BrowserFactory;
+import com.techfios.util.TakeScreenshot;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -31,7 +32,11 @@ public class AddCustomerTest extends BrowserFactory{
         AddCustomerPage addCustomerPage =  new AddCustomerPage(driver);
         addCustomerPage.verifyAddCustomersPage();
         addCustomerPage.fillRandomData();
+        TakeScreenshot t = new TakeScreenshot(driver);
+        t.capture();
         addCustomerPage.submit();
+
+
 
     }
 
